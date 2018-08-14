@@ -1,0 +1,24 @@
+--- a/configure	2018-08-13 16:55:33.577254726 -0700
++++ b/configure	2018-08-13 16:55:54.043253887 -0700
+@@ -43,9 +43,7 @@
+       envvar=`expr "x$option" : 'x\([^=]*\)='`
+       optarg=`expr "x$option" : 'x[^=]*=\(.*\)'`
+       # Reject names that are not valid shell variable names.
+-      expr "x$envvar" : ".*[^_$cr_alnum]" >/dev/null &&
+-        { echo "$as_me: error: invalid variable name: $envvar" >&2
+-      { (exit 1); exit 1; }; }
++      expr "x$envvar" : ".*[^_$cr_alnum]" >/dev/null && continue
+       #echo $envvar $optarg
+       optarg=`echo "$optarg" | sed "s/'/'\\\\\\\\''/g"`
+       eval "$envvar='$optarg'"
+@@ -57,10 +55,6 @@
+       echo "  Useful vars: ASPELL ASPELL_PARMS PREZIP DESTDIR"
+       exit 0
+       ;;
+-    *)
+-      echo "Error: unrecognized option $option";
+-      exit 1 
+-    ;;
+   esac
+ done
+ 
