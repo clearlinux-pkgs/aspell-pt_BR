@@ -6,7 +6,7 @@
 #
 Name     : aspell-pt_BR
 Version  : 20090702.0
-Release  : 3
+Release  : 4
 URL      : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20090702-0.tar.bz2
 Source0  : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20090702-0.tar.bz2
 Source99 : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20090702-0.tar.bz2.sig
