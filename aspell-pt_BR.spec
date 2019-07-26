@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x71C636695B147849 (dict-upload@aspell.net)
 #
 Name     : aspell-pt_BR
-Version  : 20090702.0
-Release  : 4
-URL      : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20090702-0.tar.bz2
-Source0  : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20090702-0.tar.bz2
-Source99 : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20090702-0.tar.bz2.sig
+Version  : 20131030.12.0
+Release  : 5
+URL      : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20131030-12-0.tar.bz2
+Source0  : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20131030-12-0.tar.bz2
+Source1 : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20131030-12-0.tar.bz2.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -18,15 +18,14 @@ BuildRequires : aspell
 Patch1: 0001-Allow-unrecognized-options.patch
 
 %description
-GNU Aspell 0.60 Brazilian Portuguese (PortuguÃªs do Brasil) Dictionary Package
-Version 20090702-0
-2009-07-05
+GNU Aspell 0.60 Brazilian Portuguese (Português do Brasil) Dictionary Package
+Version 20131030-12-0
+2019-07-23
 Maintained By:
-Leonardo Ferreira Fontenelle <leonardof at gnome org>
-Original Word List Also By:
-Raimundo Santos Moura <raimundomoura at openoffice org>
-Source URL: http://www.broffice.org/verortografico
-This word list is considered both complete and accurate.
+Kevin Atkinson <kevina at gnu org>
+Agustin Martin Domingo <agmartin at debian org>
+Wordlist URL: https://packages.debian.org/testing/aspell-pt-br
+Source URL: http://pt-br.libreoffice.org/projetos/projeto-vero-verificador-ortografico
 
 %package license
 Summary: license components for the aspell-pt_BR package.
@@ -37,29 +36,38 @@ license components for the aspell-pt_BR package.
 
 
 %prep
-%setup -q -n aspell6-pt_BR-20090702-0
+%setup -q -n aspell6-pt_BR-20131030-12-0
 %patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1545336552
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1564176339
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1545336552
+export SOURCE_DATE_EPOCH=1564176339
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/aspell-pt_BR
-cp COPYING %{buildroot}/usr/share/package-licenses/aspell-pt_BR/COPYING
 cp Copyright %{buildroot}/usr/share/package-licenses/aspell-pt_BR/Copyright
 %make_install
 
 %files
 %defattr(-,root,root,-)
 /usr/lib64/aspell-0.60/br-abnt2.kbd
+/usr/lib64/aspell-0.60/brasileiro.alias
+/usr/lib64/aspell-0.60/brazilian.alias
 /usr/lib64/aspell-0.60/pt_BR.dat
 /usr/lib64/aspell-0.60/pt_BR.multi
 /usr/lib64/aspell-0.60/pt_BR.rws
@@ -67,5 +75,4 @@ cp Copyright %{buildroot}/usr/share/package-licenses/aspell-pt_BR/Copyright
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/aspell-pt_BR/COPYING
 /usr/share/package-licenses/aspell-pt_BR/Copyright
