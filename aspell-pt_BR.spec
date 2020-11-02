@@ -6,10 +6,10 @@
 #
 Name     : aspell-pt_BR
 Version  : 20131030.12.0
-Release  : 5
+Release  : 6
 URL      : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20131030-12-0.tar.bz2
 Source0  : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20131030-12-0.tar.bz2
-Source1 : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20131030-12-0.tar.bz2.sig
+Source1  : https://mirrors.kernel.org/gnu/aspell/dict/pt_BR/aspell6-pt_BR-20131030-12-0.tar.bz2.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -37,6 +37,7 @@ license components for the aspell-pt_BR package.
 
 %prep
 %setup -q -n aspell6-pt_BR-20131030-12-0
+cd %{_builddir}/aspell6-pt_BR-20131030-12-0
 %patch1 -p1
 
 %build
@@ -44,23 +45,23 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1564176339
+export SOURCE_DATE_EPOCH=1604358322
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1564176339
+export SOURCE_DATE_EPOCH=1604358322
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/aspell-pt_BR
-cp Copyright %{buildroot}/usr/share/package-licenses/aspell-pt_BR/Copyright
+cp %{_builddir}/aspell6-pt_BR-20131030-12-0/Copyright %{buildroot}/usr/share/package-licenses/aspell-pt_BR/ac50498358c78446a668f9a6b5ecf06bb881ffd1
 %make_install
 
 %files
@@ -75,4 +76,4 @@ cp Copyright %{buildroot}/usr/share/package-licenses/aspell-pt_BR/Copyright
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/aspell-pt_BR/Copyright
+/usr/share/package-licenses/aspell-pt_BR/ac50498358c78446a668f9a6b5ecf06bb881ffd1
